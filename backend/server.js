@@ -20,7 +20,7 @@ const server = http.createServer(app); // wraps express so Socket.io can share t
 const io = require('./socket/chat')(server);
 
 // Allow the configured frontend origin(s) to call this API
-const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173').split(',');
+const allowedOrigins = (process.env.CLIENT_URL || 'https://taskflow-2ube.onrender.com').split(',');
 app.use(
   cors({
     origin: allowedOrigins,

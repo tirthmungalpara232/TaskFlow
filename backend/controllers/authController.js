@@ -174,7 +174,7 @@ const forgotPassword = async (req, res, next) => {
     const resetToken = user.generatePasswordResetToken();
     await user.save({ validateBeforeSave: false });
 
-    const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5173').split(',')[0];
+    const clientUrl = (process.env.CLIENT_URL || 'https://taskflow-2ube.onrender.com').split(',')[0];
     const resetUrl = `${clientUrl}/reset-password/${resetToken}`;
     console.log(`\n🔗 [Password Reset Link] for ${user.email}:\n${resetUrl}\n`);
 
@@ -243,7 +243,7 @@ const resetPassword = async (req, res, next) => {
 // already attached the user to req.user, so we just issue our JWT and
 // redirect back to the frontend with it in the query string.
 const oauthCallback = async (req, res) => {
-  const clientUrl = (process.env.CLIENT_URL || 'http://localhost:5173').split(',')[0];
+  const clientUrl = (process.env.CLIENT_URL || 'https://taskflow-2ube.onrender.com').split(',')[0];
 
   if (!req.user) {
     return res.redirect(`${clientUrl}/login?error=oauth_failed`);

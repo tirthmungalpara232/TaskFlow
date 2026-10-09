@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' && window.location.origin ? `${window.location.origin}/api` : 'https://taskflow-2ube.onrender.com/api');
 
 // These are plain links, not JS handlers — OAuth has to happen as a full page
 // navigation (the backend redirects to Google/GitHub, then back to our app).

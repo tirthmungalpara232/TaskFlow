@@ -6,7 +6,7 @@ const User = require('../models/User');
 // Returns the io instance so server.js can attach it to req (req.io) for
 // the chat controller to emit from.
 module.exports = function initChatSocket(server) {
-  const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173').split(',');
+  const allowedOrigins = (process.env.CLIENT_URL || 'https://taskflow-2ube.onrender.com,http://localhost:5173,http://localhost:5000').split(',');
   const io = new Server(server, {
     cors: { origin: allowedOrigins, credentials: true },
   });

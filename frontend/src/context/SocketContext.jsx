@@ -21,7 +21,10 @@ export const SocketProvider = ({ children }) => {
       return;
     }
 
-    const socketUrl = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, '') || 'http://localhost:5000';
+    const socketUrl =
+      import.meta.env.VITE_SOCKET_URL ||
+      import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, '') ||
+      (typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://taskflow-2ube.onrender.com');
     const socket = io(socketUrl, { auth: { token } });
     socketRef.current = socket;
 
