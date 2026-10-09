@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-transparent text-[#1B1330] font-sans transition-colors duration-300 dark:text-slate-100;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-900 dark:bg-brand-800 dark:text-brand-50;
+  }
+  /* Visible keyboard focus everywhere, styled to match the palette instead
+     of the browser default blue ring. */
+  :focus-visible {
+    outline: 2px solid theme('colors.brand.500');
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  /* Frosted glass panel — the base surface for cards, nav, and modals.
+     Lets the aurora glow show through faintly instead of sitting on a
+     flat gray card like before. */
+  .card {
+    @apply relative rounded-2xl border border-white/60 bg-white/70 shadow-[0_1px_2px_rgba(44,22,112,0.04)] backdrop-blur-xl transition-all duration-300 dark:border-white/10 dark:bg-white/[0.04];
+  }
+  .card-hover {
+    @apply hover:-translate-y-0.5 hover:border-brand-300/60 hover:shadow-[0_12px_32px_-8px_rgba(124,92,252,0.35)] dark:hover:border-brand-400/40 dark:hover:shadow-[0_12px_32px_-8px_rgba(124,92,252,0.25)];
+  }
+  .glass-nav {
+    @apply border-white/50 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-midnight/60;
+  }
+
+  .btn-primary {
+    @apply relative isolate overflow-hidden rounded-xl bg-gradient-to-r from-brand-600 to-tide-500 px-4 py-2.5 font-medium text-white shadow-[0_4px_16px_-4px_rgba(124,92,252,0.55)] transition-all active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100;
+  }
+  .btn-primary::before {
+    content: '';
+    @apply absolute inset-y-0 left-0 w-1/3 -skew-x-[15deg] bg-white/25 opacity-0;
+  }
+  .btn-primary:hover:not(:disabled)::before {
+    @apply opacity-100 motion-safe:animate-sheen;
+  }
+  .btn-secondary {
+    @apply rounded-xl bg-black/[0.04] px-4 py-2.5 font-medium text-slate-700 backdrop-blur transition-all hover:bg-black/[0.07] active:scale-[0.98] dark:bg-white/[0.06] dark:text-slate-200 dark:hover:bg-white/[0.1];
+  }
+  .input-field {
+    @apply w-full rounded-xl border border-slate-300/70 bg-white/70 px-3.5 py-2.5 text-sm text-slate-900 backdrop-blur transition-shadow placeholder:text-slate-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-100;
+  }
+  /* Native <select> popups are rendered by the OS/browser, not the page, so
+     backdrop-blur and translucent backgrounds never reach the options list —
+     it just falls back to the browser default (white). Give the select
+     itself and its options an explicit, solid, theme-matching color instead,
+     so the dropdown list actually looks like the rest of the app. */
+  select.input-field {
+    @apply bg-white text-slate-900 dark:bg-[#1A1330] dark:text-slate-100;
+  }
+  select.input-field option {
+    background-color: #ffffff;
+    color: #1B1330;
+  }
+  .dark select.input-field option {
+    background-color: #1A1330;
+    color: #F1EFFF;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-tide-500 bg-clip-text text-transparent dark:from-brand-400 dark:via-brand-300 dark:to-tide-300;
+  }
+
+  /* Numbers-as-data: stat values and dates get the mono face, a small
+     structural cue that this is counted/measured, not prose. */
+  .stat-figure {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Soft glow ring used behind icon containers (stat cards, avatars). */
+  .glow-ring {
+    @apply shadow-[0_0_0_1px_rgba(255,255,255,0.4)_inset,0_6px_18px_-4px_rgba(124,92,252,0.45)];
+  }
+
+  /* Shimmering skeleton sweep, replacing the flat pulse, so loading feels
+     like content is arriving rather than just blinking. */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      100deg,
+      rgba(124, 92, 252, 0.08) 20%,
+      rgba(124, 92, 252, 0.18) 40%,
+      rgba(124, 92, 252, 0.08) 60%
+    );
+    background-size: 800px 100%;
+    @apply motion-safe:animate-shimmer;
+  }
+  .dark .skeleton-shimmer {
+    background: linear-gradient(
+      100deg,
+      rgba(149, 117, 255, 0.06) 20%,
+      rgba(149, 117, 255, 0.16) 40%,
+      rgba(149, 117, 255, 0.06) 60%
+    );
+    background-size: 800px 100%;
+  }
+}
+
+/* Extra bottom padding on small screens so content isn't hidden behind the
+   fixed mobile bottom nav bar (see MobileNav.jsx) */
+@media (max-width: 639px) {
+  .mobile-nav-spacer {
+    padding-bottom: 4.5rem;
+  }
+}

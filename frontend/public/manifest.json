@@ -1,0 +1,11 @@
+{
+  "name": "TaskFlow — Kanban Task Management",
+  "short_name": "TaskFlow",
+  "description": "Manage projects and tasks on a Kanban board, with your team.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "icons": []
+}
